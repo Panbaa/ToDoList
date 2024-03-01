@@ -1,0 +1,59 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+:root{
+    --header-height: 5vh;
+    --dark-blue: #002b64;
+    --light-blue: #00a7df;
+}
+header{
+    height: var(--header-height);
+    background-color: rgb(212, 212, 212);
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 30px 10%;
+    border-radius: 0 0 20px 20px;
+}
+header li, header a, header button{
+    font-family: "Montserrat", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    color: var(--dark-blue);
+    text-decoration: none;
+}
+.logo_link{
+    margin-right: auto;
+}
+#logo{
+    height: 100px;
+    width: auto;
+    transition: 0.3s;
+}
+#logo:hover{
+    opacity: 0.5;
+    cursor: pointer;
+}
+#nav{
+    list-style: none;
+}
+#nav li{
+    display: inline;
+    padding-right: 35px;
+}
+#nav a:hover{
+    color: var(--light-blue);
+}
+#login_button{
+    padding: 9px 25px;
+    background-color: var(--light-blue);
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    transition: 0.3s;
+    color: #edf0f1;
+}
+#login_button:hover{
+color: var(--dark-blue);
+}
