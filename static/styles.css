@@ -28,6 +28,7 @@ header {
   justify-content: flex-end;
   align-items: center;
   padding: 30px 10%;
+  margin: 0 50px;
   border-radius: 0 0 20px 20px;
 }
 header li,
@@ -75,6 +76,7 @@ header button {
 }
 main {
   padding-bottom: var(--footer-height);
+  margin: 20px 50px;
 }
 footer {
   font-family: "Montserrat", sans-serif;
