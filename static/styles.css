@@ -1,0 +1,88 @@
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@500&family=Poppins&display=swap");
+
+* {
+  margin: 0;
+  padding: 0;
+}
+:root {
+  --header-height: 5vh;
+  --header-background: rgb(212, 212, 212);
+  --dark-blue: #002b64;
+  --light-blue: #00a7df;
+  --footer-height: 60px;
+}
+body {
+  position: relative;
+  background-color: var(--body-background);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+h1 {
+  font-family: "Montserrat", sans-serif;
+}
+header {
+  height: var(--header-height);
+  background-color: var(--header-background);
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 30px 10%;
+  border-radius: 0 0 20px 20px;
+}
+header li,
+header a,
+header button {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  color: var(--dark-blue);
+  text-decoration: none;
+}
+.logo_link {
+  margin-right: auto;
+}
+#logo {
+  height: 100px;
+  width: auto;
+  transition: 0.3s;
+}
+#logo:hover {
+  opacity: 0.5;
+  cursor: pointer;
+}
+#nav {
+  list-style: none;
+}
+#nav li {
+  display: inline;
+  padding-right: 35px;
+}
+#nav a:hover {
+  color: var(--light-blue);
+}
+#login_button {
+  padding: 9px 25px;
+  background-color: var(--light-blue);
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: 0.3s;
+  color: #edf0f1;
+}
+#login_button:hover {
+  color: var(--dark-blue);
+}
+main {
+  padding-bottom: var(--footer-height);
+}
+footer {
+  font-family: "Montserrat", sans-serif;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: var(--footer-height);
+}

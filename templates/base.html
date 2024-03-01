@@ -3,13 +3,21 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="../Statics/styles.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    {% block extra_css %}{% endblock %}
     <title>{% block title %}{% endblock %}</title>
   </head>
   <body>
     <header>
       <a href="index.html" class="logo_link">
-        <img class="logo_img" src="Pictures\Logo.png" alt="" id="logo"
+        <img
+          class="logo_img"
+          src="../static/Pictures/Logo.png"
+          alt=""
+          id="logo"
       /></a>
       <nav>
         <ul class="nav_links" id="nav">
@@ -20,11 +28,9 @@
       </nav>
       <a class="login-btn" href="#"><button id="login_button">Login</button></a>
     </header>
-    <main>
-      {% block content %}{% endblock %}
-    </main>
+    <main>{% block content %}{% endblock %}</main>
     <footer>
-      <p>&copy; 2024 Mein Portfolio</p>
+      <p>&copy; 2024 Gilbert Lynsche :P</p>
     </footer>
   </body>
 </html>

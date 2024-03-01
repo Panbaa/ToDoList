@@ -6,6 +6,10 @@ app = Flask(__name__)
 def index():
     return render_template('index.html')
 
+@app.route('/base.html')
+def base():
+    return render_template('base.html')
+
 @app.route('/todo.html')
 def todos():
     return render_template('todo.html')

@@ -1,25 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="styles_todo.css">
-    <title>My ToDo's</title>
-  </head>
-  <body>
-    <header>
-      <a href="index.html" class="logo_link">
-        <img class="logo_img" src="Pictures\Logo.png" alt="" id="logo"
-      /></a>
-      <nav>
-        <ul class="nav_links" id="nav">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="todo.html">ToDo's</a></li>
-          <li><a href="#">Contact</a></li>
-        </ul>
-      </nav>
-      <a class="login-btn" href="#"><button id="login_button">Login</button></a>
-    </header>
-  </body>
-</html>
+{% extends "base.html" %} {% block title %} My Portfolio via Templates {%
+endblock %} {% block extra_css %}
+<link
+  rel="stylesheet"
+  href="{{ url_for('static', filename='styles_todo.css') }}"
+/>
+{% endblock %} {% block content %}
+<h1>My ToDo's</h1>
+{% endblock %}
