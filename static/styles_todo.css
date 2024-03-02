@@ -1,0 +1,53 @@
+
+.todo-div{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: auto;
+}
+
+#todo-list{
+    list-style: none;
+    width: 500px;
+}
+
+.todo-item {
+    background-color: rgba(247, 154, 154, 0.9);
+    border-radius: 10px;
+    padding: 10px;
+    margin-bottom: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(5px);
+}
+
+.todo-content {
+    font-size: 16px;
+    color: #333;
+    white-space: normal;
+    hyphens: auto;
+    overflow-wrap: break-word;
+}
+
+/* Stil für das Popup-Overlay */
+#popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Halbtransparentes Overlay */
+    display: none; /* Ausblenden, bis es angezeigt wird */
+}
+
+/* Stil für den Popup-Inhalt */
+#popup-content {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}

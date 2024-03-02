@@ -13,10 +13,19 @@ My Portfolio via Templates
 
 {% block content %}
 <h1>My ToDo's</h1>
-<div class="todo_div">
+<div class="todo-div">
   <ul id="todo-list"></ul>
     <input type="text" id="todo-input">
     <button id="add-todo-btn">Add Todo</button>
 </div>
+
+<!-- Popup-Overlay -->
+<div id="popup-overlay">
+  <div id="popup-content">
+      <button id="mark-complete-btn">Als abgeschlossen markieren</button>
+      <button id="remove-btn">Entfernen</button>
+  </div>
+</div>
+
 <script src="../static/script_todo.js"></script>
 {% endblock %}
