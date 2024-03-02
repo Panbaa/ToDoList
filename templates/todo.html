@@ -1,9 +1,22 @@
-{% extends "base.html" %} {% block title %} My Portfolio via Templates {%
-endblock %} {% block extra_css %}
+{% extends "base.html" %} 
+
+{% block title %} 
+My Portfolio via Templates 
+{%endblock %} 
+
+{% block extra_css %}
 <link
   rel="stylesheet"
   href="{{ url_for('static', filename='styles_todo.css') }}"
 />
-{% endblock %} {% block content %}
+{% endblock %} 
+
+{% block content %}
 <h1>My ToDo's</h1>
+<div class="todo_div">
+  <ul id="todo-list"></ul>
+    <input type="text" id="todo-input">
+    <button id="add-todo-btn">Add Todo</button>
+</div>
+<script src="../static/script_todo.js"></script>
 {% endblock %}
