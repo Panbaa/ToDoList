@@ -1,37 +1,44 @@
 function getTodos() {
-    fetch("/todos")
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+  fetch("/todos")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      const todoList = document.getElementById("todo-list");
+      todoList.innerHTML = "";
+      data.forEach((todo) => {
+        const li = document.createElement("li");
+        const checkbox = document.createElement("input");
+        const deletebox = document.createElement("button");
+        deletebox.classList.add("todo-delete");
+        checkbox.type = "checkbox";
+        checkbox.classList.add("todo-check");
+        checkbox.checked = todo.completed;
+        const text = document.createElement("span");
+        text.textContent = todo.content;
+        text.id = `text-todo-${todo.id}`;
+
+        li.appendChild(checkbox);
+        li.appendChild(text);
+        li.appendChild(deletebox);
+
+        li.classList.add("todo-item");
+        li.id = todo.id;
+        todoList.appendChild(li);
+        if (todo.completed) {
+          document
+            .getElementById(`text-todo-${todo.id}`)
+            .style.setProperty("text-decoration", "line-through");
         }
-        return response.json();
-      })
-      .then((data) => {
-        const todoList = document.getElementById("todo-list");
-        todoList.innerHTML = "";
-        data.forEach((todo) => {
-          const li = document.createElement("li");
-          const checkbox = document.createElement("input");
-          checkbox.type = "checkbox";
-          checkbox.classList.add("todo-check");
-          checkbox.checked = todo.completed;
-          li.appendChild(checkbox);
-  
-          const text = document.createTextNode(todo.content);
-          li.appendChild(text);
-  
-          li.classList.add("todo-item");
-          li.id = todo.id;
-          todoList.appendChild(li);
-          if(todo.completed){
-            document.getElementById(todo.id).style.setProperty("text-decoration", "line-through")
-          }
-        });
-      })
-      .catch(error => {
-        console.error('Fehler beim Abrufen der Todos:', error);
       });
-  }
+    })
+    .catch((error) => {
+      console.error("Fehler beim Abrufen der Todos:", error);
+    });
+}
 
 // Funktion zum Hinzufügen eines Todos
 function addTodo() {
@@ -78,7 +85,7 @@ function updateTodo(todoId, content, completed) {
     }
   });
   console.log(
-    `todo ${todoId} wurde mit dem Content: ${content} und dem Bool: ${completed} updated!`
+    `Todo Nr. ${todoId} got updated with Content: ${content} and Bool: ${completed}!`
   );
 }
 
@@ -92,6 +99,22 @@ function getContent(todoId) {
     })
     .then((todo) => {
       return todo.content;
+    })
+    .catch((error) => {
+      console.error("Fehler beim Abrufen des Todos:", error);
+      return ""; // Rückgabe eines leeren Strings im Fehlerfall
+    });
+}
+function getBool(todoId) {
+  return fetch(`/todos/${todoId}`, { method: "GET" })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network respnse was not ok");
+      }
+      return response.json();
+    })
+    .then((todo) => {
+      return todo.completed;
     })
     .catch((error) => {
       console.error("Fehler beim Abrufen des Todos:", error);
@@ -128,32 +151,33 @@ document
     // Stopp der Weiterleitung
     event.preventDefault();
 
-    // Prüfen, ob das geklickte Element ein Listenelement ist
-    if (event.target && event.target.nodeName === "LI") {
-      // Zeige das Popup an und übergebe die ID des Todos
-      showPopup(event.target.id);
+    if (event.target && event.target.className.includes("todo-check")) {
+      // console.log(`checkbox of LI-${event.target.parentNode.id} was pressed`);
+      switchDoneState(event.target.parentNode.id);
+    }
+    if (event.target && event.target.id.includes("text-todo-")) {
+      console.log(`Todo ${event.target.parentNode.id} should have poped up!`);
+      // showPopup(event.target.id);
+    }
+    if (event.target && event.target.className.includes("todo-delete")) {
+      // console.log(`Todo ${event.target.parentNode.id} should have been deleted!`);
+      removeTodo(event.target.parentNode.id);
     }
   });
 
-// Eventlistener für das Klicken auf die "Entfernen"-Schaltfläche im Popup hinzufügen
-document.getElementById("remove-btn").addEventListener("click", function () {
-  // Extrahiere die ID des geklickten Todos aus dem Popup
-  const todoId = document.getElementById("popup-content").dataset.todoId;
-  // Entferne das Todo mit der entsprechenden ID
-  removeTodo(todoId);
-  hidePopup(); // Popup ausblenden
-});
-
-document
-  .getElementById("mark-complete-btn")
-  .addEventListener("click", function () {
-    const todoId = document.getElementById("popup-content").dataset.todoId;
-    markAsDone(todoId);
-    hidePopup();
-  });
-
-function markAsDone(todoId) {
-    getContent(todoId).then(content => {
-        updateTodo(todoId, content, true);
+function switchDoneState(todoId) {
+  getContent(todoId).then((content) => {
+    getBool(todoId).then((bool) => {
+      updateTodo(todoId, content, !bool);
     })
+  });
 }
+
+const inputField = document.getElementById("todo-input");
+const submitButton = document.getElementById("add-todo-btn");
+
+inputField.addEventListener('keydown', function(event){
+  if(event.key === 'Enter'){
+    submitButton.click();
+  }
+})
