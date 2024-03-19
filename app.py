@@ -12,7 +12,6 @@ class Todo(db.Model):
     content = db.Column(db.String(200), nullable=False)
     completed = db.Column(db.Boolean, default=False)
 
-# Marshmallow-Schema für Serialisierung definieren
 class TodoSchema(ma.Schema):
     class Meta:
         fields = ('id', 'content', 'completed')
@@ -20,7 +19,6 @@ class TodoSchema(ma.Schema):
 todo_schema = TodoSchema()
 todos_schema = TodoSchema(many=True)
 
-# RESTful-Routen definieren
 @app.route('/todos', methods=['GET'])
 def get_todos():
     all_todos = Todo.query.all()

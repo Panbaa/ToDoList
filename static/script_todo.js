@@ -40,7 +40,6 @@ function getTodos() {
     });
 }
 
-// Funktion zum Hinzufügen eines Todos
 function addTodo() {
   const input = document.getElementById("todo-input");
   const content = input.value;
@@ -53,18 +52,17 @@ function addTodo() {
   }).then((response) => {
     if (response.ok) {
       input.value = "";
-      getTodos(); // Aktualisiere die Todo-Liste nach dem Hinzufügen
+      getTodos();
     }
   });
 }
 
-// Funktion zum Entfernen eines Todos
 function removeTodo(todoId) {
   fetch(`/todos/${todoId}`, {
     method: "DELETE",
   }).then((response) => {
     if (response.ok) {
-      getTodos(); // Aktualisiere die Todo-Liste nach dem Entfernen
+      getTodos();
     }
   });
 }
@@ -102,7 +100,7 @@ function getContent(todoId) {
     })
     .catch((error) => {
       console.error("Fehler beim Abrufen des Todos:", error);
-      return ""; // Rückgabe eines leeren Strings im Fehlerfall
+      return "";
     });
 }
 function getBool(todoId) {
@@ -118,37 +116,31 @@ function getBool(todoId) {
     })
     .catch((error) => {
       console.error("Fehler beim Abrufen des Todos:", error);
-      return ""; // Rückgabe eines leeren Strings im Fehlerfall
+      return "";
     });
 }
 
-// Funktion zum Anzeigen des Popups
 function showPopup(todoId) {
   const popupOverlay = document.getElementById("popup-overlay");
   const popupContent = document.getElementById("popup-content");
   popupOverlay.style.display = "block";
-  popupContent.dataset.todoId = todoId; // Speichere die ID des Todos im Popup
+  popupContent.dataset.todoId = todoId;
 }
 
-// Funktion zum Ausblenden des Popups
 function hidePopup() {
   const popupOverlay = document.getElementById("popup-overlay");
   popupOverlay.style.display = "none";
 }
 
-// Beim Laden der Seite die Todos abrufen und anzeigen
 document.addEventListener("DOMContentLoaded", function () {
   getTodos();
 });
 
-// Eventlistener für das Klicken auf die "Add Todo"-Schaltfläche hinzufügen
 document.getElementById("add-todo-btn").addEventListener("click", addTodo);
 
-// Eventlistener für das Klicken auf ein Listenelement hinzufügen
 document
   .getElementById("todo-list")
   .addEventListener("click", function (event) {
-    // Stopp der Weiterleitung
     event.preventDefault();
 
     if (event.target && event.target.className.includes("todo-check")) {
@@ -157,7 +149,6 @@ document
     }
     if (event.target && event.target.id.includes("text-todo-")) {
       console.log(`Todo ${event.target.parentNode.id} should have poped up!`);
-      // showPopup(event.target.id);
     }
     if (event.target && event.target.className.includes("todo-delete")) {
       // console.log(`Todo ${event.target.parentNode.id} should have been deleted!`);
